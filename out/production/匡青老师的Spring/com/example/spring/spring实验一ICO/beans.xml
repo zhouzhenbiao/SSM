@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- 以下是关于 class Axe 的两种配置 -->
+    <!--<bean id="axe" class="Axe"/>-->
+    <!--<bean id="saw" class="Saw"/>-->
+    <!-- 配置静态工厂方法的参数 -->
+    <bean id="staticTool" class="com.example.spring.spring实验一ICO.ToolsFactory" factory-method="getStaticTools">
+        <constructor-arg value="saw"/>
+        <!-- 上一步通过静态工厂把 Tools 的实现类 new 出来了，本质上已经出现了 Tools 实现类的对象，等同于第九行 -->
+        <property name="name" value="--由 staticFactory new 出来的 Saw--"/>
+    </bean>
+
+    <!-- 配置实例工厂方法的参数 -->
+    <bean id="instanceFactory" class="com.example.spring.spring实验一ICO.ToolsFactory"/>
+    <bean id="instanceTool" factory-bean="instanceFactory" factory-method="getInstanceTools">
+        <constructor-arg value="saw"/>
+        <!-- 上一步通过静态工厂把 Tools 的实现类 new 出来了，本质上已经出现了 Tools 实现类的对象，等同于第九行 -->
+        <property name="name" value="--由 instanceFactory new 出来的 Saw--"/>
+    </bean>
+
+    <!-- Person类的配置 -->
+    <bean id="person" class="com.example.spring.spring实验一ICO.Person">
+        <constructor-arg index="0" ref="instanceTool"/>
+        <constructor-arg index="1" value="寝室长"/>
+        <!--<property name="name" value="苏志超" />-->
+        <!--<property name="axe" ref="axe"/>-->
+    </bean>
+</beans>

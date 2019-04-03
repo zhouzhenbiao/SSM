@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="person" class="com.example.spring.spring实验三_合集注入.entity.Person">
+        <property name="name" value="周振标"/>
+        <property name="address" value="交大理工"/>
+        <property name="age" value="19"/>
+    </bean>
+
+    <bean id="customer" class="com.example.spring.spring实验三_合集注入.entity.Customer">
+        <property name="list">
+            <list>
+                <value>list_1</value>
+                <value>list_2</value>
+                <ref bean="person"/>
+            </list>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="王楠" value="周春清"/>
+                <entry key="邓静静" value="邓依"/>
+                <entry key-ref="person" value="陈慧"/>
+            </map>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>set_1</value>
+                <value>set_2</value>
+                <ref bean="person"/>
+            </set>
+        </property>
+        
+        <property name="properties">
+            <props>
+                <prop key="牛肉粉">6元</prop>
+                <prop key="手抓饼">8元</prop>
+                <prop key="螺蛳粉">8元</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
